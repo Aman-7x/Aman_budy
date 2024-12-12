@@ -1,14 +1,18 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';  // Import cors middleware
 import router from './routes/user-routes.js';
 import blogRouter from './routes/blog-routes.js';
 
 const app = express();
 
-//middleware
+// Use the CORS middleware to enable cross-origin requests
+app.use(cors());  // This allows all origins. You can specify specific origins if needed
+
+// Middleware
 app.use(express.json());
 app.use("/api/user", router);  
-app.use("/api/blog", blogRouter);  
+app.use("/api/blog", blogRouter);
 
 mongoose
   .connect('mongodb://localhost:27017/Aman')
